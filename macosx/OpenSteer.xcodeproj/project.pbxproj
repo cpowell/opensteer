@@ -335,39 +335,39 @@
 		32FFF52306E9CEA700E1D8A3 /* OpenSteer */ = {
 			isa = PBXGroup;
 			children = (
-				3242E4E111B420DF00F217B1 /* SharedPointer.h */,
 				32FFF52406E9CEA700E1D8A3 /* AbstractVehicle.h */,
 				32FFF52506E9CEA700E1D8A3 /* Annotation.h */,
 				32FFF52606E9CEA700E1D8A3 /* Camera.h */,
 				32FFF52706E9CEA700E1D8A3 /* Clock.h */,
+				324DA5F6082ABE43000F3779 /* Color.h */,
 				324386DA07293A2200B6EBA6 /* Draw.h */,
 				32FFF52906E9CEA700E1D8A3 /* LocalSpace.h */,
 				32FFF52A06E9CEA700E1D8A3 /* lq.h */,
 				32FFF52B06E9CEA700E1D8A3 /* Obstacle.h */,
+				32FFF52C06E9CEA700E1D8A3 /* OldPathway.h */,
 				84AD12AD070E221100559513 /* OpenSteerDemo.h */,
-				327C89DE085762AD00C14AE6 /* QueryPathAlikeBaseDataExtractionPolicies.h */,
-				3224E4F80844ACF800C13D97 /* QueryPathAlike.h */,
-				3224E59508485F8A00C13D97 /* QueryPathAlikeUtilities.h */,
-				3224E6600849C27400C13D97 /* QueryPathAlikeMappings.h */,
-				3230C46B085066DD00CBB0D9 /* SegmentedPathAlikeUtilities.h */,
 				3224E4F40844AC1700C13D97 /* Path.h */,
-				3224E4F20844AB8E00C13D97 /* SegmentedPath.h */,
-				3224E4F50844AC3B00C13D97 /* PolylineSegmentedPath.h */,
 				32ECFE4C08336C8C00E5E444 /* Pathway.h */,
-				3224E4AC0844A32F00C13D97 /* SegmentedPathway.h */,
-				3224E4F60844AC8700C13D97 /* PolylineSegmentedPathwaySingleRadius.h */,
-				3224E4F70844ACA200C13D97 /* PolylineSegmentedPathwaySegmentRadii.h */,
 				32FFF52D06E9CEA700E1D8A3 /* PlugIn.h */,
+				3224E4F50844AC3B00C13D97 /* PolylineSegmentedPath.h */,
+				3224E4F70844ACA200C13D97 /* PolylineSegmentedPathwaySegmentRadii.h */,
+				3224E4F60844AC8700C13D97 /* PolylineSegmentedPathwaySingleRadius.h */,
 				32FFF52E06E9CEA700E1D8A3 /* Proximity.h */,
+				3224E4F80844ACF800C13D97 /* QueryPathAlike.h */,
+				327C89DE085762AD00C14AE6 /* QueryPathAlikeBaseDataExtractionPolicies.h */,
+				3224E6600849C27400C13D97 /* QueryPathAlikeMappings.h */,
+				3224E59508485F8A00C13D97 /* QueryPathAlikeUtilities.h */,
+				3224E4F20844AB8E00C13D97 /* SegmentedPath.h */,
+				3230C46B085066DD00CBB0D9 /* SegmentedPathAlikeUtilities.h */,
+				3224E4AC0844A32F00C13D97 /* SegmentedPathway.h */,
+				3242E4E111B420DF00F217B1 /* SharedPointer.h */,
 				32FFF52F06E9CEA700E1D8A3 /* SimpleVehicle.h */,
+				3224E4A50843657800C13D97 /* StandardTypes.h */,
 				32FFF53006E9CEA700E1D8A3 /* SteerLibrary.h */,
+				32ECF063082FC7FB00E5E444 /* UnusedParameter.h */,
 				32FFF53206E9CEA700E1D8A3 /* Utilities.h */,
 				32FFF53306E9CEA700E1D8A3 /* Vec3.h */,
 				32ECFEAA0833893500E5E444 /* Vec3Utilities.h */,
-				324DA5F6082ABE43000F3779 /* Color.h */,
-				32ECF063082FC7FB00E5E444 /* UnusedParameter.h */,
-				3224E4A50843657800C13D97 /* StandardTypes.h */,
-				32FFF52C06E9CEA700E1D8A3 /* OldPathway.h */,
 			);
 			path = OpenSteer;
 			sourceTree = "<group>";
@@ -375,28 +375,28 @@
 		32FFF54406E9CEBD00E1D8A3 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				32C150890765ABE000A8BC25 /* TerrainRayTest.cpp */,
-				32C1508A0765ABE000A8BC25 /* TerrainRayTest.h */,
 				32FFF54506E9CEBD00E1D8A3 /* Camera.cpp */,
 				32FFF54606E9CEBD00E1D8A3 /* Clock.cpp */,
+				324DA5EE082ABDD8000F3779 /* Color.cpp */,
 				32FFF54706E9CEBD00E1D8A3 /* Draw.cpp */,
 				32FFF54806E9CEBD00E1D8A3 /* lq.c */,
 				32FFF54906E9CEBD00E1D8A3 /* main.cpp */,
 				841E3BFC0736BF4400E3AD2C /* Obstacle.cpp */,
-				84AD12B1070E224000559513 /* OpenSteerDemo.cpp */,
 				327C7F2D0857205D00C14AE6 /* OldPathway.cpp */,
+				84AD12B1070E224000559513 /* OpenSteerDemo.cpp */,
 				3224E4FB0844B13C00C13D97 /* Path.cpp */,
-				3224E4FD0844B15200C13D97 /* SegmentedPath.cpp */,
-				3224E4FF0844B16200C13D97 /* PolylineSegmentedPath.cpp */,
 				3224E5010844B17700C13D97 /* Pathway.cpp */,
-				3224E5030844B18600C13D97 /* SegmentedPathway.cpp */,
-				3224E5050844B1A500C13D97 /* PolylineSegmentedPathwaySingleRadius.cpp */,
-				3224E5070844B1B800C13D97 /* PolylineSegmentedPathwaySegmentRadii.cpp */,
 				32FFF54B06E9CEBD00E1D8A3 /* PlugIn.cpp */,
+				3224E4FF0844B16200C13D97 /* PolylineSegmentedPath.cpp */,
+				3224E5070844B1B800C13D97 /* PolylineSegmentedPathwaySegmentRadii.cpp */,
+				3224E5050844B1A500C13D97 /* PolylineSegmentedPathwaySingleRadius.cpp */,
+				3224E4FD0844B15200C13D97 /* SegmentedPath.cpp */,
+				3224E5030844B18600C13D97 /* SegmentedPathway.cpp */,
 				32FFF54C06E9CEBD00E1D8A3 /* SimpleVehicle.cpp */,
+				32C150890765ABE000A8BC25 /* TerrainRayTest.cpp */,
+				32C1508A0765ABE000A8BC25 /* TerrainRayTest.h */,
 				32FFF54E06E9CEBD00E1D8A3 /* Vec3.cpp */,
 				32ECFEAF083389F000E5E444 /* Vec3Utilities.cpp */,
-				324DA5EE082ABDD8000F3779 /* Color.cpp */,
 			);
 			name = src;
 			path = ../src;
@@ -405,7 +405,6 @@
 		32FFF56306E9CECE00E1D8A3 /* plugins */ = {
 			isa = PBXGroup;
 			children = (
-				3242E4DC11B4207100F217B1 /* PedestriansWalkingAnEight.cpp */,
 				32FFF56406E9CECE00E1D8A3 /* Boids.cpp */,
 				32FFF56506E9CECE00E1D8A3 /* CaptureTheFlag.cpp */,
 				32FFF56606E9CECE00E1D8A3 /* LowSpeedTurn.cpp */,
@@ -413,6 +412,7 @@
 				32FFF56806E9CECE00E1D8A3 /* MultiplePursuit.cpp */,
 				32FFF56906E9CECE00E1D8A3 /* OneTurning.cpp */,
 				32FFF56A06E9CECE00E1D8A3 /* Pedestrian.cpp */,
+				3242E4DC11B4207100F217B1 /* PedestriansWalkingAnEight.cpp */,
 				32FFF56B06E9CECE00E1D8A3 /* Soccer.cpp */,
 			);
 			name = plugins;

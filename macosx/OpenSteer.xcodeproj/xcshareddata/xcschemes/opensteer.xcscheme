@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "327C7E980856F0B300C14AE6"
-               BuildableName = "Doxygen"
-               BlueprintName = "Doxygen"
+               BlueprintIdentifier = "831E83FD17F3EC5200E61E10"
+               BuildableName = "libopensteer.dylib"
+               BlueprintName = "opensteer"
                ReferencedContainer = "container:OpenSteer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
