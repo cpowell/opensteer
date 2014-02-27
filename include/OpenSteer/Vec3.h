@@ -66,11 +66,11 @@ namespace OpenSteer {
         // ----------------------------------------- generic 3d vector operations
 
         // three-dimensional Cartesian coordinates
-        float x, y, z;
+        double x, y, z;
 
         // constructors
-        Vec3 (void): x( 0.0f ), y( 0.0f ), z( 0.0f ) {}
-        Vec3 (float X, float Y, float Z) : x( X ), y( Y ), z( Z ) {}
+        Vec3 (void): x( 0.0 ), y( 0.0 ), z( 0.0 ) {}
+        Vec3 (double X, double Y, double Z) : x( X ), y( Y ), z( Z ) {}
 
         // vector addition
         Vec3 operator+ (const Vec3& v) const {return Vec3 (x+v.x, y+v.y, z+v.z);}
@@ -82,25 +82,25 @@ namespace OpenSteer {
         Vec3 operator- (void) const {return Vec3 (-x, -y, -z);}
 
         // vector times scalar product (scale length of vector times argument)
-        Vec3 operator* (const float s) const {return Vec3 (x * s, y * s, z * s);}
+        Vec3 operator* (const double s) const {return Vec3 (x * s, y * s, z * s);}
 
         // vector divided by a scalar (divide length of vector by argument)
-        Vec3 operator/ (const float s) const {return Vec3 (x / s, y / s, z / s);}
+        Vec3 operator/ (const double s) const {return Vec3 (x / s, y / s, z / s);}
 
         // dot product
-        float dot (const Vec3& v) const {return (x * v.x) + (y * v.y) + (z * v.z);}
+        double dot (const Vec3& v) const {return (x * v.x) + (y * v.y) + (z * v.z);}
 
         // length
-        float length (void) const {return sqrtXXX (lengthSquared ());}
+        double length (void) const {return sqrtXXX (lengthSquared ());}
 
         // length squared
-        float lengthSquared (void) const {return this->dot (*this);}
+        double lengthSquared (void) const {return this->dot (*this);}
 
         // normalize: returns normalized version (parallel to this, length = 1)
         Vec3 normalize (void) const
         {
             // skip divide if length is zero
-            const float len = length ();
+            const double len = length ();
             return (len>0) ? (*this)/len : (*this);
         }
 
@@ -116,8 +116,8 @@ namespace OpenSteer {
         // assignment
         Vec3 operator= (const Vec3& v) {x=v.x; y=v.y; z=v.z; return *this;}
 
-        // set XYZ coordinates to given three floats
-        Vec3 set (const float _x, const float _y, const float _z)
+        // set XYZ coordinates to given three doubles
+        Vec3 set (const double _x, const double _y, const double _z)
         {x = _x; y = _y; z = _z; return *this;}
 
         // +=
@@ -127,10 +127,10 @@ namespace OpenSteer {
         Vec3 operator-= (const Vec3& v) {return *this = (*this - v);}
 
         // *=
-        Vec3 operator*= (const float& s) {return *this = (*this * s);}
+        Vec3 operator*= (const double& s) {return *this = (*this * s);}
 
         
-        Vec3 operator/=( float d ) { return *this = (*this / d);  }
+        Vec3 operator/=( double d ) { return *this = (*this / d);  }
         
         // equality/inequality
         bool operator== (const Vec3& v) const {return x==v.x && y==v.y && z==v.z;}
@@ -139,7 +139,7 @@ namespace OpenSteer {
         // @todo Remove - use @c distance from the Vec3Utilitites header instead.
         // XXX experimental (4-1-03 cwr): is this the right approach?  defining
         // XXX "Vec3 distance (vec3, Vec3)" collided with STL's distance template.
-        static float distance (const Vec3& a, const Vec3& b){ return(a-b).length();}
+        static double distance (const Vec3& a, const Vec3& b){ return(a-b).length();}
 
         // --------------------------- utility member functions used in OpenSteer
 
@@ -148,7 +148,7 @@ namespace OpenSteer {
 
         inline Vec3 parallelComponent (const Vec3& unitBasis) const
         {
-            const float projection = this->dot (unitBasis);
+            const double projection = this->dot (unitBasis);
             return unitBasis * projection;
         }
 
@@ -165,10 +165,10 @@ namespace OpenSteer {
         // the value returned has length of maxLength and is paralle to the
         // original input.
 
-        Vec3 truncateLength (const float maxLength) const
+        Vec3 truncateLength (const double maxLength) const
         {
-            const float maxLengthSquared = maxLength * maxLength;
-            const float vecLengthSquared = this->lengthSquared ();
+            const double maxLengthSquared = maxLength * maxLength;
+            const double vecLengthSquared = this->lengthSquared ();
             if (vecLengthSquared <= maxLengthSquared)
                 return *this;
             else
@@ -181,17 +181,17 @@ namespace OpenSteer {
 
         // rotate this vector about the global Y (up) axis by the given angle
 
-        Vec3 rotateAboutGlobalY (float angle) const 
+        Vec3 rotateAboutGlobalY (double angle) const
         {
-            const float s = sinXXX (angle);
-            const float c = cosXXX (angle);
+            const double s = sinXXX (angle);
+            const double c = cosXXX (angle);
             return Vec3 ((this->x * c) + (this->z * s),
                          (this->y),
                          (this->z * c) - (this->x * s));
         }
 
         // version for caching sin/cos computation
-        Vec3 rotateAboutGlobalY (float angle, float& sin, float& cos) const 
+        Vec3 rotateAboutGlobalY (double angle, double& sin, double& cos) const
         {
             // is both are zero, they have not be initialized yet
             if (sin==0 && cos==0)
@@ -206,10 +206,10 @@ namespace OpenSteer {
 
         // if this position is outside sphere, push it back in by one diameter
 
-        Vec3 sphericalWrapAround (const Vec3& center, float radius)
+        Vec3 sphericalWrapAround (const Vec3& center, double radius)
         {
             const Vec3 offset = *this - center;
-            const float r = offset.length();
+            const double r = offset.length();
             if (r > radius)
                 return *this + ((offset/r) * radius * -2);
             else
@@ -225,10 +225,10 @@ namespace OpenSteer {
 
 
     // ----------------------------------------------------------------------------
-    // scalar times vector product ("float * Vec3")
+    // scalar times vector product ("double * Vec3")
 
 
-    inline Vec3 operator* (float s, const Vec3& v) {return v*s;}
+    inline Vec3 operator* (double s, const Vec3& v) {return v*s;}
 
 
 	// return cross product a x b
@@ -301,7 +301,7 @@ namespace OpenSteer {
 
     Vec3 vecLimitDeviationAngleUtility (const bool insideOrOutside,
                                         const Vec3& source,
-                                        const float cosineOfConeAngle,
+                                        const double cosineOfConeAngle,
                                         const Vec3& basis);
 
 
@@ -313,7 +313,7 @@ namespace OpenSteer {
 
 
     inline Vec3 limitMaxDeviationAngle (const Vec3& source,
-                                        const float cosineOfConeAngle,
+                                        const double cosineOfConeAngle,
                                         const Vec3& basis)
     {
         return vecLimitDeviationAngleUtility (true, // force source INSIDE cone
@@ -331,7 +331,7 @@ namespace OpenSteer {
 
 
     inline Vec3 limitMinDeviationAngle (const Vec3& source,
-                                        const float cosineOfConeAngle,
+                                        const double cosineOfConeAngle,
                                         const Vec3& basis)
     {    
         return vecLimitDeviationAngleUtility (false, // force source OUTSIDE cone
@@ -347,7 +347,7 @@ namespace OpenSteer {
     // the line ("lineUnitTangent")
 
 
-    inline float distanceFromLine (const Vec3& point,
+    inline double distanceFromLine (const Vec3& point,
                                    const Vec3& lineOrigin,
                                    const Vec3& lineUnitTangent)
     {
