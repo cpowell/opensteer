@@ -89,13 +89,9 @@ namespace OpenSteer {
 
         // dot product
         double dot (const Vec3& v) const {
-            auto val = (x * v.x) + (y * v.y) + (z * v.z);
-            if (val>1.0)
-                val=1.0;
-            if (val<-1.0)
-                val=-1.0;
-            return val;
+            return (x * v.x) + (y * v.y) + (z * v.z);
         }
+
 
         // length
         double length (void) const {return sqrtXXX (lengthSquared ());}
