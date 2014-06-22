@@ -182,6 +182,25 @@ namespace OpenSteer {
 
         Vec3 setYtoZero (void) const {return Vec3 (this->x, 0, this->z);}
 
+        Vec3 rotateAboutZ(double radians) const {
+            double circle_cos = std::cos(-radians);
+            double circle_sin = std::sin(-radians);
+            return Vec3{circle_cos * x - circle_sin * y,
+                        circle_sin * x + circle_cos * y,
+                        z};
+        }
+
+        void rotateSelfAboutZ(double radians) {
+            double circle_cos = std::cos(-radians);
+            double circle_sin = std::sin(-radians);
+
+            double tmpx = circle_cos * x - circle_sin * y;
+            double tmpy = circle_sin * x + circle_cos * y;
+
+            x = tmpx;
+            y = tmpy;
+        }
+
         // rotate this vector about the global Y (up) axis by the given angle
 
         Vec3 rotateAboutGlobalY (double angle) const
