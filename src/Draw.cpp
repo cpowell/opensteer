@@ -42,7 +42,7 @@
 // from this module only.
 //
 // 10-04-04 bk:  put everything into the OpenSteer namespace
-// 06-25-02 cwr: created 
+// 06-25-02 cwr: created
 //
 //
 // ----------------------------------------------------------------------------
@@ -50,7 +50,9 @@
 #include "OpenSteer/Draw.h"
 
 #include <iomanip>
+#include <iostream>
 #include <sstream>
+#include <string>
 
 
 // Include headers for OpenGL (gl.h), OpenGL Utility Library (glu.h)
@@ -58,20 +60,20 @@
 // XXX In Mac OS X these headers are located in a different directory.
 // XXX Need to revisit conditionalization on operating system.
 #if __APPLE__ && __MACH__
-    #include <OpenGL/gl.h>   // for Mac OS X
-    #include <OpenGL/glu.h>   // for Mac OS X
-    #ifndef HAVE_NO_GLUT
-        #include <GLUT/glut.h>   // for Mac OS X
-    #endif
+#include <OpenGL/gl.h>   // for Mac OS X
+#include <OpenGL/glu.h>   // for Mac OS X
+#ifndef HAVE_NO_GLUT
+#include <GLUT/glut.h>   // for Mac OS X
+#endif
 #else
-    #ifdef _MSC_VER
-        #include <windows.h>
-    #endif
-    #include <GL/gl.h>     // for Linux and Windows
-    #include <GL/glu.h>     // for Linux and Windows
-    #ifndef HAVE_NO_GLUT
-        #include <GL/glut.h>   // for Mac OS X
-    #endif
+#ifdef _MSC_VER
+#include <windows.h>
+#endif
+#include <GL/gl.h>     // for Linux and Windows
+#include <GL/glu.h>     // for Linux and Windows
+#ifndef HAVE_NO_GLUT
+#include <GL/glut.h>   // for Mac OS X
+#endif
 #endif
 
 
@@ -89,7 +91,7 @@
 namespace {
     // ------------------------------------------------------------------------
     // emit an OpenGL vertex based on a Vec3
-    
+
     inline void iglVertexVec3 (const OpenSteer::Vec3& v)
     {
         glVertex3f (v.x, v.y, v.z);
@@ -98,12 +100,12 @@ namespace {
     // ------------------------------------------------------------------------
     // OpenGL-specific routine for error check, report, and exit
 
-    void 
+    void
     checkForGLError (const char* locationDescription)
     {
         // normally (when no error) just return
         const int lastGlError = glGetError();
-        if (lastGlError == GL_NO_ERROR) return;
+        if (lastGlError == GL_NO_ERROR) { return; }
 
         // otherwise print vaguely descriptive error message, then exit
         std::cerr << std::endl << "OpenSteerDemo: OpenGL error ";
@@ -115,11 +117,11 @@ namespace {
         case GL_STACK_OVERFLOW:    std::cerr << "GL_STACK_OVERFLOW";    break;
         case GL_STACK_UNDERFLOW:   std::cerr << "GL_STACK_UNDERFLOW";   break;
         case GL_OUT_OF_MEMORY:     std::cerr << "GL_OUT_OF_MEMORY";     break;
-    #ifndef _WIN32
+#ifndef _WIN32
         case GL_TABLE_TOO_LARGE:   std::cerr << "GL_TABLE_TOO_LARGE";   break;
-    #endif
+#endif
         }
-        if (locationDescription) std::cerr << " in " << locationDescription;
+        if (locationDescription) { std::cerr << " in " << locationDescription; }
         std::cerr << std::endl << std::endl << std::flush;
         /// @todo - a library should never bail, this is an application function
         // throw an exception? Call a registered exit hook?
@@ -128,7 +130,7 @@ namespace {
 
     // ----------------------------------------------------------------------------
     // draw 3d "graphical annotation" lines, used for debugging
-    
+
     inline void iDrawLine (const OpenSteer::Vec3& startPoint,
                            const OpenSteer::Vec3& endPoint,
                            const OpenSteer::Color& color)
@@ -143,7 +145,7 @@ namespace {
 
     // ----------------------------------------------------------------------------
     // Draw a single OpenGL triangle given three Vec3 vertices.
-    
+
     inline void iDrawTriangle (const OpenSteer::Vec3& a,
                                const OpenSteer::Vec3& b,
                                const OpenSteer::Vec3& c,
@@ -163,7 +165,7 @@ namespace {
 
     // ------------------------------------------------------------------------
     // Draw a single OpenGL quadrangle given four Vec3 vertices, and color.
-    
+
     inline void iDrawQuadrangle (const OpenSteer::Vec3& a,
                                  const OpenSteer::Vec3& b,
                                  const OpenSteer::Vec3& c,
@@ -185,7 +187,7 @@ namespace {
     // ------------------------------------------------------------------------
     // Between matched sets of these two calls, assert that all polygons
     // will be drawn "double sided", that is, without back-face culling
-    
+
     inline void beginDoubleSidedDrawing (void)
     {
         glPushAttrib (GL_ENABLE_BIT);
@@ -237,7 +239,7 @@ namespace {
 
 
 
-void 
+void
 OpenSteer::glVertexVec3 (const Vec3& v)
 {
     iglVertexVec3 (v);
@@ -250,21 +252,20 @@ OpenSteer::glVertexVec3 (const Vec3& v)
 // warn when draw functions are called during OpenSteerDemo's update phase
 
 
-void 
+void
 OpenSteer::warnIfInUpdatePhase2 (const char* name)
 {
     std::ostringstream message;
     message << "use annotation (during simulation update, do not call ";
     message << name;
     message << ")";
-    message << std::ends;
-    std::cerr << message;       // send message to cerr, let host app worry about where to redirect it
+    std::cout << message.str();       // send message to cerr, let host app worry about where to redirect it
 }
 
 
 
 
-void 
+void
 OpenSteer::drawLine (const Vec3& startPoint,
                      const Vec3& endPoint,
                      const Color& color)
@@ -281,7 +282,7 @@ OpenSteer::drawLine (const Vec3& startPoint,
 // glEnable (GL_BLEND)
 
 
-void 
+void
 OpenSteer::drawLineAlpha (const Vec3& startPoint,
                           const Vec3& endPoint,
                           const Color& color,
@@ -299,7 +300,7 @@ OpenSteer::drawLineAlpha (const Vec3& startPoint,
 
 
 
-void 
+void
 OpenSteer::drawTriangle (const Vec3& a,
                          const Vec3& b,
                          const Vec3& c,
@@ -311,9 +312,9 @@ OpenSteer::drawTriangle (const Vec3& a,
 
 
 
-    
-    
-void 
+
+
+void
 OpenSteer::drawQuadrangle (const Vec3& a,
                            const Vec3& b,
                            const Vec3& c,
@@ -329,7 +330,7 @@ OpenSteer::drawQuadrangle (const Vec3& a,
 // whose mid-line connects two given endpoints
 
 
-void 
+void
 OpenSteer::drawXZWideLine (const Vec3& startPoint,
                            const Vec3& endPoint,
                            const Color& color,
@@ -362,7 +363,7 @@ OpenSteer::drawXZWideLine (const Vec3& startPoint,
 // argument)
 
 
-void 
+void
 OpenSteer::drawCircleOrDisk (const float radius,
                              const Vec3& axis,
                              const Vec3& center,
@@ -383,9 +384,9 @@ OpenSteer::drawCircleOrDisk (const float radius,
         ls.setPosition (center);
         ls.setUnitSideFromForwardAndUp ();
     }
-        
-    // make disks visible (not culled) from both sides 
-    if (filled) beginDoubleSidedDrawing ();
+
+    // make disks visible (not culled) from both sides
+    if (filled) { beginDoubleSidedDrawing (); }
 
     // point to be rotated about the (local) Y axis, angular step size
     Vec3 pointOnCircle (radius, 0, 0);
@@ -398,7 +399,7 @@ OpenSteer::drawCircleOrDisk (const float radius,
     glBegin (filled ? GL_TRIANGLE_FAN : GL_LINE_LOOP);
 
     // for the filled case, first emit the center point
-    if (filled) iglVertexVec3 (in3d ? ls.position() : center);
+    if (filled) { iglVertexVec3 (in3d ? ls.position() : center); }
 
     // rotate p around the circle in "segments" steps
     double sin=0, cos=0;
@@ -408,8 +409,8 @@ OpenSteer::drawCircleOrDisk (const float radius,
         // emit next point on circle, either in 3d (globalized out
         // of the local space), or in 2d (offset from the center)
         iglVertexVec3 (in3d ?
-                           ls.globalizePosition (pointOnCircle) :
-                           (Vec3) (pointOnCircle + center));
+                       ls.globalizePosition (pointOnCircle) :
+                       (Vec3) (pointOnCircle + center));
 
         // rotate point one more step around circle
         pointOnCircle = pointOnCircle.rotateAboutGlobalY (step, sin, cos);
@@ -417,14 +418,14 @@ OpenSteer::drawCircleOrDisk (const float radius,
 
     // close drawing operation
     glEnd ();
-    if (filled) endDoubleSidedDrawing ();
+    if (filled) { endDoubleSidedDrawing (); }
 }
 
 
 // ------------------------------------------------------------------------
 
 
-void 
+void
 OpenSteer::draw3dCircleOrDisk (const float radius,
                                const Vec3& center,
                                const Vec3& axis,
@@ -441,7 +442,7 @@ OpenSteer::draw3dCircleOrDisk (const float radius,
 // drawing utility used by both drawXZCircle and drawXZDisk
 
 
-void 
+void
 OpenSteer::drawXZCircleOrDisk (const float radius,
                                const Vec3& center,
                                const Color& color,
@@ -463,7 +464,7 @@ OpenSteer::drawXZCircleOrDisk (const float radius,
 // XXX maybe this should be merged in with drawCircleOrDisk
 
 
-void 
+void
 OpenSteer::drawXZArc (const Vec3& start,
                       const Vec3& center,
                       const float arcLength,
@@ -509,7 +510,7 @@ OpenSteer::drawXZArc (const Vec3& start,
 // a simple 2d vehicle on the XZ plane
 
 
-void 
+void
 OpenSteer::drawBasic2dCircularVehicle (const AbstractVehicle& vehicle,
                                        const Color& color)
 {
@@ -544,7 +545,7 @@ OpenSteer::drawBasic2dCircularVehicle (const AbstractVehicle& vehicle,
 // a simple 3d vehicle
 
 
-void 
+void
 OpenSteer::drawBasic3dSphericalVehicle (const AbstractVehicle& vehicle,
                                         const Color& color)
 {
@@ -591,7 +592,7 @@ OpenSteer::drawBasic3dSphericalVehicle (const AbstractVehicle& vehicle,
 // drawBasic3dSphericalVehicle with a supplied draw routine
 // provided so non-OpenGL based apps can draw a boid
 
-void 
+void
 OpenSteer::drawBasic3dSphericalVehicle (drawTriangleRoutine draw, const AbstractVehicle& vehicle,
                                         const Color& color)
 {
@@ -648,7 +649,7 @@ OpenSteer::drawBasic3dSphericalVehicle (drawTriangleRoutine draw, const Abstract
 // color1 and color2 are used for alternating subsquares.)
 
 
-void 
+void
 OpenSteer::drawXZCheckerboardGrid (const float size,
                                    const int subsquares,
                                    const Vec3& center,
@@ -696,7 +697,7 @@ OpenSteer::drawXZCheckerboardGrid (const float size,
 // are drawn in the specified "color".)
 
 
-void 
+void
 OpenSteer::drawXZLineGrid (const float size,
                            const int subsquares,
                            const Vec3& center,
@@ -737,7 +738,7 @@ OpenSteer::drawXZLineGrid (const float size,
 // given by the coordinates of "size".
 
 
-void 
+void
 OpenSteer::drawAxes  (const AbstractLocalSpace& ls,
                       const Vec3& size,
                       const Color& color)
@@ -745,7 +746,7 @@ OpenSteer::drawAxes  (const AbstractLocalSpace& ls,
     const Vec3 x (size.x / 2, 0, 0);
     const Vec3 y (0, size.y / 2, 0);
     const Vec3 z (0, 0, size.z / 2);
- 
+
     iDrawLine (ls.globalizePosition (x), ls.globalizePosition (x * -1), color);
     iDrawLine (ls.globalizePosition (y), ls.globalizePosition (y * -1), color);
     iDrawLine (ls.globalizePosition (z), ls.globalizePosition (z * -1), color);
@@ -761,7 +762,7 @@ OpenSteer::drawAxes  (const AbstractLocalSpace& ls,
 // use gGlobalSpace to draw a box aligned with global space
 
 
-void 
+void
 OpenSteer::drawBoxOutline  (const AbstractLocalSpace& localSpace,
                             const Vec3& size,
                             const Color& color)
@@ -817,7 +818,7 @@ namespace {
         const OpenSteer::Vec3 view = pointToLookAt - cameraPosition;
         const OpenSteer::Vec3 perp = view.perpendicularComponent (up);
         if (perp == OpenSteer::Vec3::zero)
-            std::cerr << "OpenSteer - LookAt: degenerate camera";
+        { std::cerr << "OpenSteer - LookAt: degenerate camera"; }
     }
 
 } // anonymous namespace
@@ -831,7 +832,7 @@ namespace {
 // camera's view).
 
 
-void 
+void
 OpenSteer::drawCameraLookAt (const Vec3& cameraPosition,
                              const Vec3& pointToLookAt,
                              const Vec3& up)
@@ -848,10 +849,10 @@ OpenSteer::drawCameraLookAt (const Vec3& cameraPosition,
 
 
 
-void 
+void
 OpenSteer::draw2dLine (const Vec3& startPoint,
                        const Vec3& endPoint,
-                       const Color& color, 
+                       const Color& color,
                        float w, float h)
 {
     const GLint originalMatrixMode = begin2dDrawing (w, h);
@@ -866,7 +867,7 @@ OpenSteer::draw2dLine (const Vec3& startPoint,
 // crosshair with a gap at the center, drawn in white with black borders
 
 
-void 
+void
 OpenSteer::drawReticle (float w, float h)
 {
     const int a = 10;
@@ -909,8 +910,8 @@ OpenSteer::drawReticle (float w, float h)
 // check for errors during redraw, report any and then exit
 
 
-void 
-OpenSteer::checkForDrawError (const char * locationDescription)
+void
+OpenSteer::checkForDrawError (const char* locationDescription)
 {
     checkForGLError (locationDescription);
 }
@@ -921,7 +922,7 @@ OpenSteer::checkForDrawError (const char * locationDescription)
 // given point on the screen: the ray that would be traced for that pixel
 
 
-OpenSteer::Vec3 
+OpenSteer::Vec3
 OpenSteer::directionFromCameraToScreenPosition (int x, int y, int h)
 {
     // Get window height, viewport, modelview and projection matrices
@@ -973,8 +974,8 @@ namespace {
         {
             // draw all deferred lines
             for (DeferredLines::iterator i = lines.begin();
-                 i < lines.end();
-                 i++)
+                    i < lines.end();
+                    i++)
             {
                 DeferredLine& dl = *i;
                 iDrawLine (dl.startPoint, dl.endPoint, dl.color);
@@ -996,13 +997,13 @@ namespace {
     };
 
 
-DeferredLine::DeferredLines DeferredLine::lines;
+    DeferredLine::DeferredLines DeferredLine::lines;
 
 
 } // anonymous namespace
 
 
-void 
+void
 OpenSteer::deferredDrawLine (const Vec3& startPoint,
                              const Vec3& endPoint,
                              const Color& color)
@@ -1011,7 +1012,7 @@ OpenSteer::deferredDrawLine (const Vec3& startPoint,
 }
 
 
-void 
+void
 OpenSteer::drawAllDeferredLines (void)
 {
     DeferredLine::drawAll ();
@@ -1055,8 +1056,8 @@ namespace {
         {
             // draw all deferred circles
             for (DeferredCircles::iterator i = circles.begin();
-                 i < circles.end();
-                 i++)
+                    i < circles.end();
+                    i++)
             {
                 DeferredCircle& dc = *i;
                 drawCircleOrDisk (dc.radius, dc.axis, dc.center, dc.color,
@@ -1083,13 +1084,13 @@ namespace {
     };
 
 
-DeferredCircle::DeferredCircles DeferredCircle::circles;
+    DeferredCircle::DeferredCircles DeferredCircle::circles;
 
 
 } // anonymous namesopace
 
 
-void 
+void
 OpenSteer::deferredDrawCircleOrDisk (const float radius,
                                      const Vec3& axis,
                                      const Vec3& center,
@@ -1103,7 +1104,7 @@ OpenSteer::deferredDrawCircleOrDisk (const float radius,
 }
 
 
-void 
+void
 OpenSteer::drawAllDeferredCirclesOrDisks (void)
 {
     DeferredCircle::drawAll ();
@@ -1496,7 +1497,7 @@ OpenSteer::drawAllDeferredCirclesOrDisks (void)
 // }
 
 
-void 
+void
 OpenSteer::draw2dTextAt3dLocation (const char& text,
                                    const Vec3& location,
                                    const Color& color, float w, float h)
@@ -1533,11 +1534,11 @@ OpenSteer::draw2dTextAt3dLocation (const char& text,
         else
         {
             // otherwise draw character bitmap
-            #ifndef HAVE_NO_GLUT
-                glutBitmapCharacter (GLUT_BITMAP_9_BY_15, *p);
-            #else
-                // no character drawing with GLUT presently
-            #endif
+#ifndef HAVE_NO_GLUT
+            glutBitmapCharacter (GLUT_BITMAP_9_BY_15, *p);
+#else
+            // no character drawing with GLUT presently
+#endif
         }
     }
 
@@ -1545,7 +1546,7 @@ OpenSteer::draw2dTextAt3dLocation (const char& text,
     end2dDrawing (originalMatrixMode);
 }
 
-void 
+void
 OpenSteer::draw2dTextAt3dLocation (const std::ostringstream& text,
                                    const Vec3& location,
                                    const Color& color, float w, float h)
@@ -1554,7 +1555,7 @@ OpenSteer::draw2dTextAt3dLocation (const std::ostringstream& text,
 }
 
 
-void 
+void
 OpenSteer::draw2dTextAt2dLocation (const char& text,
                                    const Vec3 location,
                                    const Color& color, float w, float h)
@@ -1569,7 +1570,7 @@ OpenSteer::draw2dTextAt2dLocation (const char& text,
 }
 
 
-void 
+void
 OpenSteer::draw2dTextAt2dLocation (const std::ostringstream& text,
                                    const Vec3 location,
                                    const Color& color, float w, float h)
@@ -1701,14 +1702,14 @@ namespace OpenSteer {
         // given three points on the surface of this sphere, if the triangle
         // is "small enough" draw it, otherwise subdivide it into four smaller
         // triangles and recursively draw each of them.
-        void drawMeshedTriangleOnSphere (const Vec3& a, 
+        void drawMeshedTriangleOnSphere (const Vec3& a,
                                          const Vec3& b,
                                          const Vec3& c) const
         {
             // if all edges are short enough
             if ((((a - b).length ()) < maxEdgeLength) &&
-                (((b - c).length ()) < maxEdgeLength) &&
-                (((c - a).length ()) < maxEdgeLength))
+                    (((b - c).length ()) < maxEdgeLength) &&
+                    (((c - a).length ()) < maxEdgeLength))
             {
                 // draw triangle
                 drawTriangleOnSphere (a, b, c);
@@ -1730,7 +1731,7 @@ namespace OpenSteer {
 
 
         // draw one mesh element for drawMeshedTriangleOnSphere
-        void drawTriangleOnSphere (const Vec3& a, 
+        void drawTriangleOnSphere (const Vec3& a,
                                    const Vec3& b,
                                    const Vec3& c) const
         {
@@ -1747,9 +1748,9 @@ namespace OpenSteer {
                 {
                     // draw filled triangle
                     if (drawFrontFacing)
-                        drawTriangle (c, b, a, color);
+                    { drawTriangle (c, b, a, color); }
                     else
-                        drawTriangle (a, b, c, color);
+                    { drawTriangle (a, b, c, color); }
                 }
                 else
                 {
@@ -1779,23 +1780,23 @@ namespace OpenSteer {
         // Draws line from A to B but not from B to A: assumes each edge
         // will be drawn in both directions, picks just one direction for
         // drawing according to an arbitary but reproducable criterion.
-        void drawMeshedTriangleLine (const Vec3& a, 
+        void drawMeshedTriangleLine (const Vec3& a,
                                      const Vec3& b,
                                      const Color& color) const
         {
             if (a.x != b.x)
             {
-                if (a.x > b.x) drawLine (a, b, color);
+                if (a.x > b.x) { drawLine (a, b, color); }
             }
             else
             {
                 if (a.y != b.y)
                 {
-                    if (a.y > b.y) drawLine (a, b, color); 
+                    if (a.y > b.y) { drawLine (a, b, color); }
                 }
                 else
                 {
-                    if (a.z > b.z) drawLine (a, b, color); 
+                    if (a.z > b.z) { drawLine (a, b, color); }
                 }
             }
         }
