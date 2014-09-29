@@ -1519,7 +1519,7 @@ namespace {
             // which is then rotated step by step around center
             Vec3 spoke = start - center;
             // determine the angular step per segment
-            const float step = arcAngle / segments;
+            const double step = arcAngle / segments;
             // store distance to, and position of first obstacle
             float obstacleDistance = 0;
             returnObstaclePosition = Vec3::zero;
@@ -1527,7 +1527,7 @@ namespace {
             const float startRadius = (endRadiusChange == 0) ? 0 : spoke.length(); 
 
             // traverse each segment along arc
-            float sin=0, cos=0;
+            double sin=0, cos=0;
             Vec3 oldPoint = start;
             bool obstacleFound = false;
             for (int i = 0; i < segments; i++)
@@ -2446,10 +2446,10 @@ namespace {
             const float twoPi = 2 * OPENSTEER_M_PI;
             const float circumference = twoPi * radius;
             const float arcAngle = twoPi * arcLength / circumference;
-            const float step = arcAngle / segments;
+            const double step = arcAngle / segments;
 
             // draw each segment along arc
-            float sin=0, cos=0;
+            double sin=0, cos=0;
             for (int i = 0; i < segments; i++)
             {
                 const Vec3 old = spoke + center;

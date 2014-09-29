@@ -124,7 +124,7 @@ OpenSteer::randomVectorOnUnitRadiusXZDisk (void)
 OpenSteer::Vec3 
 OpenSteer::vecLimitDeviationAngleUtility (const bool insideOrOutside,
                                           const Vec3& source,
-                                          const float cosineOfConeAngle,
+                                          const double cosineOfConeAngle,
                                           const Vec3& basis)
 {
     // immediately return zero length input vectors

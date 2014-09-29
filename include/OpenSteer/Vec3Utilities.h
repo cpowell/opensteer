@@ -87,7 +87,7 @@ namespace OpenSteer {
     bool
     equalsRelative( Vec3 const& lhs, 
                      Vec3 const& rhs, 
-                     float const& tolerance = std::numeric_limits< float >::epsilon()  ) {
+                     double const& tolerance = std::numeric_limits< float >::epsilon()  ) {
         return equalsRelative( lhs.x, rhs.x, tolerance ) && equalsRelative( lhs.y, rhs.y ) && equalsRelative( lhs.z, rhs.z );
     }
     

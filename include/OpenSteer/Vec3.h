@@ -185,9 +185,9 @@ namespace OpenSteer {
         Vec3 rotateAboutZ(double radians) const {
             double circle_cos = std::cos(-radians);
             double circle_sin = std::sin(-radians);
-            return Vec3{circle_cos * x - circle_sin * y,
+            return Vec3(circle_cos * x - circle_sin * y,
                         circle_sin * x + circle_cos * y,
-                        z};
+                        z);
         }
 
         void rotateSelfAboutZ(double radians) {
@@ -325,7 +325,6 @@ namespace OpenSteer {
                                         const Vec3& source,
                                         const double cosineOfConeAngle,
                                         const Vec3& basis);
-
 
     // ----------------------------------------------------------------------------
     // Enforce an upper bound on the angle by which a given arbitrary vector

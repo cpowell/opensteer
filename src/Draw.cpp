@@ -389,7 +389,7 @@ OpenSteer::drawCircleOrDisk (const float radius,
 
     // point to be rotated about the (local) Y axis, angular step size
     Vec3 pointOnCircle (radius, 0, 0);
-    const float step = (2 * OPENSTEER_M_PI) / segments;
+    const double step = (2 * OPENSTEER_M_PI) / segments;
 
     // set drawing color
     glColor3f (color.r(), color.g(), color.b());
@@ -401,7 +401,7 @@ OpenSteer::drawCircleOrDisk (const float radius,
     if (filled) iglVertexVec3 (in3d ? ls.position() : center);
 
     // rotate p around the circle in "segments" steps
-    float sin=0, cos=0;
+    double sin=0, cos=0;
     const int vertexCount = filled ? segments+1 : segments;
     for (int i = 0; i < vertexCount; i++)
     {
@@ -481,7 +481,7 @@ OpenSteer::drawXZArc (const Vec3& start,
     const float twoPi = 2 * OPENSTEER_M_PI;
     const float circumference = twoPi * radius;
     const float arcAngle = twoPi * arcLength / circumference;
-    const float step = arcAngle / segments;
+    const double step = arcAngle / segments;
 
     // set drawing color
     glColor3f (color.r(), color.g(), color.b());
@@ -490,7 +490,7 @@ OpenSteer::drawXZArc (const Vec3& start,
     glBegin (GL_LINE_STRIP);
 
     // draw each segment along arc
-    float sin=0, cos=0;
+    double sin=0, cos=0;
     for (int i = 0; i < segments; i++)
     {
         // emit next point on arc
